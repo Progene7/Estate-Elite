@@ -1,0 +1,48 @@
+-- Create Users table
+CREATE TABLE Users (
+    userID INT PRIMARY KEY,
+    adharID VARCHAR(20) UNIQUE,
+    name VARCHAR(50),
+    age INT,
+    address VARCHAR(100),
+    city VARCHAR(50),
+    state VARCHAR(50),
+    pincode VARCHAR(10),
+    phone VARCHAR(20),
+    username VARCHAR(50),
+    password VARCHAR(50)
+);
+
+-- Create Properties table
+CREATE TABLE Properties (
+    propertyID INT PRIMARY KEY,
+    ownerID INT,
+    propertyType VARCHAR(20),
+    availableFrom DATE,
+    availableTill DATE,
+    rent_pm DECIMAL(10, 2),
+    yearlyHike DECIMAL(5, 2),
+    totalArea DECIMAL(10, 2),
+    plinthArea DECIMAL(10, 2),
+    numBedrooms INT,
+    numFloors INT,
+    yearOfConstruction INT,
+    locality VARCHAR(50),
+    address VARCHAR(100),
+    otherFacilities VARCHAR(200),
+    FOREIGN KEY (ownerID) REFERENCES Users (userID)
+);
+
+-- Create RentHistory table
+CREATE TABLE RentHistory (
+    rentID INT PRIMARY KEY,
+    propertyID INT,
+    tenantID INT,
+    start_date DATE,
+    end_date DATE,
+    rent_pm DECIMAL(10, 2),
+    yearlyHike DECIMAL(5, 2),
+    agencyCommission DECIMAL(5, 2),
+    FOREIGN KEY (propertyID) REFERENCES Properties (propertyID),
+    FOREIGN KEY (tenantID) REFERENCES Users (userID)
+);
