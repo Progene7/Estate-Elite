@@ -1,0 +1,50 @@
+CREATE OR REPLACE PROCEDURE GetPropertyRecords (
+  ownrID IN NUMBER
+)
+AS
+  CURSOR prop_cursor IS
+    SELECT *
+    FROM property
+    WHERE ownerID = GetPropertyRecords.ownrID;
+  
+  prop property%ROWTYPE;
+BEGIN
+  OPEN prop_cursor;
+  
+  LOOP
+    FETCH prop_cursor INTO prop;
+    EXIT WHEN prop_cursor%NOTFOUND;
+    
+    DBMS_OUTPUT.PUT_LINE('Property ID: ' || prop.propertyID);
+    DBMS_OUTPUT.PUT_LINE('Owner ID: ' || prop.ownerID);
+    DBMS_OUTPUT.PUT_LINE('PIN Code: ' || prop.PINCode);
+    DBMS_OUTPUT.PUT_LINE('Available From: ' || prop.availableFrom);
+    DBMS_OUTPUT.PUT_LINE('Available Till: ' || prop.availableTill);
+    DBMS_OUTPUT.PUT_LINE('Rent per Month: ' || prop.rentPerMonth);
+    DBMS_OUTPUT.PUT_LINE('Hike in Rent: ' || prop.hikeInRent);
+    DBMS_OUTPUT.PUT_LINE('Total Area: ' || prop.totalArea);
+    DBMS_OUTPUT.PUT_LINE('Plinth Area: ' || prop.plinthArea);
+    DBMS_OUTPUT.PUT_LINE('Number of Floors: ' || prop.numFloors);
+    DBMS_OUTPUT.PUT_LINE('Year of Construction: ' || prop.yearOfConstruction);
+    DBMS_OUTPUT.PUT_LINE('Locality: ' || prop.locality);
+    DBMS_OUTPUT.PUT_LINE('Address: ' || prop.address);
+    DBMS_OUTPUT.PUT_LINE('Property Type: ' || prop.propType);
+    DBMS_OUTPUT.PUT_LINE('Room Type: ' || prop.rType);
+    DBMS_OUTPUT.PUT_LINE('Number of Bedrooms: ' || prop.numBedrooms);
+    DBMS_OUTPUT.PUT_LINE('Commercial Type: ' || prop.cType);
+    DBMS_OUTPUT.PUT_LINE('--------------------------------------');
+  END LOOP;
+  
+  CLOSE prop_cursor;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('No property records found for the specified owner ID.');
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error: An error occurred while fetching property records.');
+END;
+/
+
+
+EXEC GetPropertyRecords(123456789012);
+
+

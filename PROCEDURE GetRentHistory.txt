@@ -1,0 +1,35 @@
+CREATE OR REPLACE PROCEDURE GetRentHistory (
+  propertyID IN INTEGER
+)
+AS
+  CURSOR rental_cursor (p_propertyID INTEGER) IS
+    SELECT r.rentalID, r.propertyID, r.tenantID, r.startDate, r.endDate, r.rentPerMonth, r.hikeInRent, r.agencyCommission
+    FROM rental r
+    WHERE r.propertyID = p_propertyID
+    ORDER BY r.startDate;
+
+  rental_record rental_cursor%ROWTYPE;
+BEGIN
+  OPEN rental_cursor(propertyID);
+  LOOP
+    FETCH rental_cursor INTO rental_record;
+    EXIT WHEN rental_cursor%NOTFOUND;
+
+    -- Print the rent history details
+    DBMS_OUTPUT.PUT_LINE('Rental ID: ' || rental_record.rentalID);
+    DBMS_OUTPUT.PUT_LINE('Property ID: ' || rental_record.propertyID);
+    DBMS_OUTPUT.PUT_LINE('Tenant ID: ' || rental_record.tenantID);
+    DBMS_OUTPUT.PUT_LINE('Start Date: ' || rental_record.startDate);
+    DBMS_OUTPUT.PUT_LINE('End Date: ' || rental_record.endDate);
+    DBMS_OUTPUT.PUT_LINE('Rent per Month: ' || rental_record.rentPerMonth);
+    DBMS_OUTPUT.PUT_LINE('Hike in Rent: ' || rental_record.hikeInRent);
+    DBMS_OUTPUT.PUT_LINE('Agency Commission: ' || rental_record.agencyCommission);
+    DBMS_OUTPUT.PUT_LINE('--------------------------------------');
+  END LOOP;
+  CLOSE rental_cursor;
+END;
+/
+
+BEGIN
+  GetRentHistory(3);
+END;

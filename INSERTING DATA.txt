@@ -1,0 +1,105 @@
+INSERT INTO Users
+VALUES 
+(123456789012, 'Rishabh', 24, 'A-101', 'Main Street', 'New York', 'New York', 10001, 'Rishab03', 'goyal82', 'Owner');
+INSERT INTO Users
+VALUES 
+(234567890123, 'Kanishk', 25, 'B-202', 'Second Avenue', 'Chicago', 'Illinois', 60601, 'Kanishk69', 'letmesleep', 'Tenant');
+INSERT INTO Users
+VALUES 
+(345678901234, 'Aditya', 28, 'C-303', 'Third Street', 'Los Angeles', 'California', 90001, 'guppy45', 'marvel', 'Manager');
+INSERT INTO Users
+VALUES 
+(456789012345, 'Yash', 27, 'D-404', 'Fourth Avenue', 'Houston', 'Texas', 77001, 'yashgeez', 'gupta99', 'DBA');
+INSERT INTO Users
+VALUES 
+(678901234567, 'Saransh', 30, 'A-101', 'Main Road', 'Bangalore', 'Karnataka', 560001, 'Sarz333', 'sk\2422457', 'Owner');
+INSERT INTO Users
+VALUES 
+(789012345678, 'Om Bhuva', 25, 'B-202', 'First Cross', 'Mumbai', 'Maharashtra', 400001, 'spongebob123', 'sandy', 'Tenant');
+INSERT INTO Users
+VALUES 
+(890123456789, 'Amal', 35, 'D-404', 'Third Street', 'Chennai', 'Tamil Nadu', 600001, 'octopussy', 'tenticles', 'Tenant');
+INSERT INTO Users
+VALUES 
+(567890123456, 'Vanshika', 50, 'E-505', 'Fourth Lane', 'Hyderabad', 'Telangana', 500001, 'elfbar', 'onlyvans', 'Owner');
+
+INSERT INTO property
+VALUES (1, 123456789012, 560100, DATE '2023-05-01', DATE '2024-04-30', 15000, 0.05, 1200, 900, 2, DATE '2010-01-01', 'JP Nagar', '2nd Main Road, JP Nagar Phase 3', 'Residential', 1, 2, 0);
+
+INSERT INTO property
+VALUES (2, 678901234567, 560076, DATE '2023-05-01', DATE '2024-04-30', 20000, 0.03, 1800, 1400, 3, DATE '2015-01-01', 'Koramangala', '5th Block, Koramangala', 'Commercial', 0, NULL, 1);
+
+INSERT INTO property
+VALUES (3, 567890123456, 560100, DATE '2023-05-01', DATE '2024-04-30', 25000, 0.02, 2000, 1600, 4, DATE '2018-01-01', 'Electronic City', 'Phase 2, Electronic City', 'Commercial', 0, NULL, 1);
+
+
+INSERT INTO roles
+VALUES
+('Owner','N','Y');
+INSERT INTO roles
+VALUES
+('Tenant','N','N');
+INSERT INTO roles
+VALUES
+('Manager','N','Y');
+INSERT INTO roles
+VALUES
+('DBA','Y','Y');
+
+INSERT INTO contacts
+VALUES
+(123456789012,9748519099);
+INSERT INTO contacts
+VALUES
+(234567890123,1234418646);
+INSERT INTO contacts
+VALUES
+(345678901234,9864521345);
+INSERT INTO contacts
+VALUES
+(456789012345,9874632545);
+INSERT INTO contacts
+VALUES
+(678901234567,9314592897);
+INSERT INTO contacts
+VALUES
+(789012345678,4569821364);
+INSERT INTO contacts
+VALUES
+(890123456789,1264589745);
+INSERT INTO contacts
+VALUES
+(567890123456,8569412365);
+INSERT INTO contacts
+VALUES
+(234567890123,5894621354);
+
+INSERT INTO rental
+VALUES
+(1, 2, 234567890123, DATE '2022-01-01', DATE '2022-12-31', 12000, 0.05, 0.10);
+INSERT INTO rental
+VALUES
+(2, 3, 789012345678, DATE '2022-02-01', DATE '2022-07-31', 15000, 0.00, 0.08);
+INSERT INTO rental
+VALUES
+(3, 1, 890123456789, DATE '2022-03-15', DATE '2023-03-14', 18000, 0.10, 0.12);
+
+INSERT INTO property_rental_history
+VALUES
+(1, 890123456789, DATE '2022-03-15', DATE '2023-03-14', 18000, 0.10, 0.12);
+INSERT INTO property_rental_history
+VALUES
+(2, 234567890123, DATE '2022-01-01', DATE '2022-12-31', 12000, 0.05, 0.10);
+INSERT INTO property_rental_history
+VALUES
+(3, 789012345678, DATE '2022-02-01', DATE '2022-07-31', 15000, 0.00, 0.08);
+INSERT INTO property_rental_history
+VALUES
+(2, 890123456789, DATE '2021-11-03', DATE '2022-02-23', 14000, 0.25, 0.11);
+
+select * from users;
+select * from property;
+select * from roles;
+select * from contacts;
+select * from rental;
+select * from property_rental_history;

@@ -1,0 +1,42 @@
+CREATE OR REPLACE PROCEDURE SearchPropertyForRent (
+  searchCityLocality IN VARCHAR
+)
+AS
+  CURSOR property_cursor (p_searchCityLocality VARCHAR) IS
+    SELECT p.propertyID, p.ownerID, p.PINCode, p.availableFrom, p.availableTill, p.rentPerMonth, p.hikeInRent, p.totalArea, p.plinthArea, p.numFloors, p.yearOfConstruction, p.locality, p.address, p.propType, p.rType, p.numBedrooms, p.cType
+    FROM property p
+    WHERE p.locality = p_searchCityLocality;
+
+  property_record property_cursor%ROWTYPE;
+BEGIN
+  OPEN property_cursor(searchCityLocality);
+  LOOP
+    FETCH property_cursor INTO property_record;
+    EXIT WHEN property_cursor%NOTFOUND;
+
+    DBMS_OUTPUT.PUT_LINE('Property ID: ' || property_record.propertyID);
+    DBMS_OUTPUT.PUT_LINE('Owner ID: ' || property_record.ownerID);
+    DBMS_OUTPUT.PUT_LINE('PIN Code: ' || property_record.PINCode);
+    DBMS_OUTPUT.PUT_LINE('Available From: ' || property_record.availableFrom);
+    DBMS_OUTPUT.PUT_LINE('Available Till: ' || property_record.availableTill);
+    DBMS_OUTPUT.PUT_LINE('Rent per Month: ' || property_record.rentPerMonth);
+    DBMS_OUTPUT.PUT_LINE('Hike in Rent: ' || property_record.hikeInRent);
+    DBMS_OUTPUT.PUT_LINE('Total Area: ' || property_record.totalArea);
+    DBMS_OUTPUT.PUT_LINE('Plinth Area: ' || property_record.plinthArea);
+    DBMS_OUTPUT.PUT_LINE('Number of Floors: ' || property_record.numFloors);
+    DBMS_OUTPUT.PUT_LINE('Year of Construction: ' || property_record.yearOfConstruction);
+    DBMS_OUTPUT.PUT_LINE('Locality: ' || property_record.locality);
+    DBMS_OUTPUT.PUT_LINE('Address: ' || property_record.address);
+    DBMS_OUTPUT.PUT_LINE('Property Type: ' || property_record.propType);
+    DBMS_OUTPUT.PUT_LINE('Room Type: ' || property_record.rType);
+    DBMS_OUTPUT.PUT_LINE('Number of Bedrooms: ' || property_record.numBedrooms);
+    DBMS_OUTPUT.PUT_LINE('Commercial Type: ' || property_record.cType);
+    DBMS_OUTPUT.PUT_LINE('--------------------------------------');
+  END LOOP;
+  CLOSE property_cursor;
+END;
+/
+
+BEGIN
+  SearchPropertyForRent('JP Nagar');
+END;

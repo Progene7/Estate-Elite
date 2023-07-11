@@ -1,0 +1,37 @@
+CREATE OR REPLACE PROCEDURE GetTenantDetails (
+  proprtyID IN INTEGER
+)
+AS
+  CURSOR tenant_cursor (p_propertyID INTEGER) IS
+    SELECT u.adharID, u.Name, u.Age, u.DoorNo, u.Street, u.City, u.State, u.PINCode, u.LoginID
+    FROM rental r
+    JOIN Users u ON r.tenantID = u.adharID
+    WHERE r.propertyID = p_propertyID;
+
+  tenant_record tenant_cursor%ROWTYPE;
+BEGIN
+  OPEN tenant_cursor(proprtyID);
+  LOOP
+    FETCH tenant_cursor INTO tenant_record;
+    EXIT WHEN tenant_cursor%NOTFOUND;
+
+    -- Print the tenant details
+    DBMS_OUTPUT.PUT_LINE('Adhar ID: ' || tenant_record.adharID);
+    DBMS_OUTPUT.PUT_LINE('Name: ' || tenant_record.Name);
+    DBMS_OUTPUT.PUT_LINE('Age: ' || tenant_record.Age);
+    DBMS_OUTPUT.PUT_LINE('Door No: ' || tenant_record.DoorNo);
+    DBMS_OUTPUT.PUT_LINE('Street: ' || tenant_record.Street);
+    DBMS_OUTPUT.PUT_LINE('City: ' || tenant_record.City);
+    DBMS_OUTPUT.PUT_LINE('State: ' || tenant_record.State);
+    DBMS_OUTPUT.PUT_LINE('PIN Code: ' || tenant_record.PINCode);
+    DBMS_OUTPUT.PUT_LINE('Login ID: ' || tenant_record.LoginID);
+    DBMS_OUTPUT.PUT_LINE('--------------------------------------');
+  END LOOP;
+  CLOSE tenant_cursor;
+END;
+/
+
+
+BEGIN
+  GetTenantDetails(2);
+END;

@@ -1,0 +1,18 @@
+CREATE OR REPLACE PROCEDURE CalculateCommission (
+  agencyID IN INTEGER
+)
+AS
+  commission_amt NUMBER;
+BEGIN
+  SELECT SUM(r.agencyCommission) INTO commission_amt
+  FROM rental r
+  JOIN property p ON r.propertyID = p.propertyID
+  WHERE p.ownerID = agencyID;
+
+  DBMS_OUTPUT.PUT_LINE('Commission for Agency ID ' || agencyID || ': ' || commission_amt);
+END;
+/
+
+BEGIN
+  CalculateCommission(567890123456);
+END;

@@ -1,0 +1,26 @@
+CREATE OR REPLACE PROCEDURE CreateNewUser (
+  adharID IN NUMBER,
+  Name IN VARCHAR,
+  Age IN INT,
+  DoorNo IN VARCHAR,
+  Street IN VARCHAR,
+  City IN VARCHAR,
+  State IN VARCHAR,
+  PINCode IN NUMBER,
+  LoginID IN VARCHAR,
+  Password IN VARCHAR,
+  UserType IN VARCHAR
+)
+AS
+BEGIN
+  INSERT INTO Users
+  VALUES (adharID, Name, Age, DoorNo, Street, City, State, PINCode, LoginID, Password, UserType);
+
+  COMMIT;
+END;
+/
+
+
+BEGIN
+  CreateNewUser(345678934567, 'John Doe', 30, 'A-101', 'Main Street', 'New York', 'New York', 10001, 'johndoe', 'password123', 'Owner');
+END;
